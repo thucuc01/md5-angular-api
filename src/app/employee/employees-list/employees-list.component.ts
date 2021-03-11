@@ -14,17 +14,19 @@ export class EmployeesListComponent implements OnInit {
   id?: number;
   page = 0;
   size = 5;
+  totalPage:number=0;
   employees : Employee []=[];
   constructor(private employeeService:EmployeeService,private router : Router) { }
 
   ngOnInit(): void {
     this.getAll(this.page, this.size);
-
   }
 
   getAll(page: number, size: number){
     this.employeeService.getAll(page, size).subscribe(value => {
-      this.employees= value.data;
+      this.employees= value.data.content;
+      this.totalPage =value.data.totalPages;
+      console.log("sdfvtrsdfc" +this.totalPage);
     },val=>console.log(val))
   }
 
@@ -37,41 +39,43 @@ export class EmployeesListComponent implements OnInit {
     this.getAll(this.page,this.size);
   }
 
-  deleteEmployee(id:number|undefined){
-    if(id != undefined) {
-      this.employeeService.deleteEmployee(id).subscribe(
-        ()=>{this.getAll(this.page,this.size);
-          alert("Xoa thanh cong")}
-      )
-    }
-  }
+  // deleteEmployee(id:number|undefined){
+  //   if(id != undefined) {
+  //     this.employeeService.deleteEmployee(id).subscribe(
+  //       ()=>{this.getAll(this.page,this.size);
+  //         alert("Xoa thanh cong")}
+  //     )
+  //   }
+  // }
   updateEmployee(id:number|undefined){
     if(id != undefined) {
       this.router.navigate(['/update', id])
     }
 
   }
-  // openPopup(id:number|undefined){
-  //   if(id!=undefined){
-  //     this.id=id;
-  //     // $('#showForm').modal('show');
-  //     $(document).ready(function (){
-  //       $('.btn').click(function () {
-  //         $('#modal').css("display","block");
-  //       })
-  //       $('#close').click(function () {
-  //         $('#modal').css("display","none");
-  //       })
-  //     })
-  //   }
-  // }
-  // deleteEmployee(){
-  //   if(this.id != undefined) {
-  //     this.employeeService.deleteEmployee(this.id).subscribe(
-  //       ()=>{this.getAll(this.page,this.size);
-  //         alert("Xoa thanh cong")}
-  //     )
-  //   }
-  // }
+  openPopup(id:number|undefined){
+    if(id!=undefined){
+      this.id=id;
+      // $('#showForm').modal('show');
+      $(document).ready(function (){
+        $('.btn').click(function () {
+          $('#modal').css("display","block");
+        })
+        $('#close').click(function () {
+          $('#modal').css("display","none");
+        })
+      })
+    }
+  }
+  deleteEmployee(){
+    if(this.id != undefined) {
+      this.employeeService.deleteEmployee(this.id).subscribe(
+        ()=>{
+          this.page=0;
+          this.getAll(this.page,this.size);
+          alert("Xoa thanh cong")}
+      )
+    }
+  }
 }
 

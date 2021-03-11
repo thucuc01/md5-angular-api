@@ -2,24 +2,24 @@
 <div class="container">
   <h2>List Employee!</h2>
   <hr>
-<!--  <div class="row">-->
-<!--    <div class="col"></div>-->
-<!--    <div class="col">-->
-<!--      <div id="modal">-->
-<!--        <h5 style="color: aliceblue">Ban co chac chan muon xoa khong ?</h5>-->
-<!--        <hr>-->
-<!--        <div id="close" class="row">-->
-<!--          <div class="col"></div>-->
-<!--          <div class="col"><button class="btn btn-danger">No</button></div>-->
-<!--          <div class="col"><button class="btn btn-success" (click)="deleteEmployee()">Yes</button></div>-->
-<!--          <div class="col"></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="col"></div>-->
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <div id="modal">
+        <h5 style="color: aliceblue">Ban co chac chan muon xoa khong ?</h5>
+        <hr>
+        <div id="close" class="row">
+          <div class="col"></div>
+          <div class="col"><button class="btn btn-danger">No</button></div>
+          <div class="col"><button class="btn btn-success" (click)="deleteEmployee()">Yes</button></div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
 
 
-<!--  </div>-->
+  </div>
   <hr>
   <table class="table table-bordered">
     <th>Name</th>
@@ -35,7 +35,7 @@
       <td>{{employee.phone}}</td>
       <td>
 <!--        <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">Delete</button>-->
-        <button class="btn" (click)="deleteEmployee(employee.id)">Delete</button>
+        <button class="btn" (click)="openPopup(employee.id)">Delete</button>
       </td>
       <td>
         <button class="btn btn-success" (click)="updateEmployee(employee.id)">Update</button>
@@ -44,6 +44,6 @@
   </table>
   <button *ngIf="page!=0" (click)="back()">Back</button>
   Page {{page+1}}
-  <button *ngIf="employees.length==size||employees.length==0" (click)="next()">Next</button>
+  <button *ngIf="page<totalPage-1" (click)="next()">Next</button>
 </div>
 
