@@ -1,0 +1,28 @@
+<div class="container">
+  <h3 style="text-align: center">Create Form</h3>
+<!--  <div [hidden]="submidtted">-->
+    <form #employeeForm="ngForm" (submit)="onSubmit(employeeForm)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" #name="ngModel" class="form-control" id="name" name="name" [(ngModel)]="employee.name" required>
+        <td><p *ngIf="name?.errors?.required">Mời nhập đầy đủ thông tin</p></td>
+
+      </div>
+      <div class="form-group">
+        <label for="name">Email</label>
+        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="employee.email">
+      </div>
+      <div class="form-group">
+        <label for="name">Phone</label>
+        <input type="number" class="form-control" id="phone" name="phone" [(ngModel)]="employee.phone">
+      </div>
+      <div class="form-group">
+        <label for="name">Department</label>
+        <input type="text" class="form-control" id="department" name="department" [(ngModel)]="employee.department">
+      </div>
+
+
+      <button class="btn btn-success">Create</button>
+    </form>
+<!--  </div>-->
+</div>
